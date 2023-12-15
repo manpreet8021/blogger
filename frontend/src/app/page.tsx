@@ -1,12 +1,14 @@
-import Image from 'next/image'
+import Banner from '@/components/ui/Banner'
 import Header from '@/components/ui/Header'
-import Divider from '@/components/ui/Divider'
+import PostCard from '@/components/ui/PostCard'
+import Image from 'next/image'
 
 export default function Home() {
   return (
-    <main className='min-h-screen px-20 py-5'>
+    <>
       <Header />
-      <Divider />
-    </main>
+      <Banner />
+      <PostCard />
+    </>
   )
 }
