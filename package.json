@@ -7,9 +7,11 @@
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "npm run dev --prefix frontend",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "seed": "node backend/seeder.js",
+    "seed:destroy": "node backend/seeder.js -d"
   },
-  "author": "",
+  "author": "Manpreet Singh",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^8.2.2",
