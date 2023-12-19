@@ -2,7 +2,6 @@
   "name": "blogger",
   "version": "1.0.0",
   "description": "Here you can create blog and follow other people arround the world with similar intrest",
-  "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",
@@ -20,6 +19,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "mongodb": "^6.3.0",
-    "mongoose": "^8.0.3"
+    "mongoose": "^8.0.3",
+    "web3": "^4.3.0"
   }
 }
