@@ -3,13 +3,16 @@ const dotenv = require('dotenv');
 const connectdb = require('./config/db.js');
 const productRoutes = require('./routes/productRoutes.js');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware.js');
+const web3 = require("./config/web3.js");
 
-
-dotenv.config()
+dotenv.config();
 connectdb();
-const port = 5000;
+const provider = web3()
+const port = process.env.PORT;
 
 const app = express();
+
+app.set('provider', provider);
 
 app.get('/', (req,res)=>{
     res.send('API is running...');
