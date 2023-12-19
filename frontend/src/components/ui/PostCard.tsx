@@ -1,11 +1,11 @@
 import Image from "next/image"
 
 const styles = {
-    wrapper: 'flex max-w-[46rem] max-h-[10rem] items-center gap-[1rem] cursor-pointer',
+    wrapper: 'flex max-w-[46rem] h-[10rem] items-center gap-[1rem] cursor-pointer',
     authorContainer: 'flex gap-[.4rem]',
     authorImageContainer: 'grid place-items-center rounded-full overflow-hidden h-[1.4rem] w-[1.4rem]',
     authorImage:'object-cover',
-    postDetails: '',
+    postDetails: 'flex-[2.5] flex flex-col',
     authorName:'font-semibold',
     title: 'font-bold text-2xl',
     brefing: 'text-[#787878]',
