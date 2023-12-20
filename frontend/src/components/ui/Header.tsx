@@ -11,7 +11,7 @@ const styles = {
 }
 
 export default function Header() {
-    const {connect, address, error, initalized} = useWeb3()
+    const {connect, address, error, initalized} = useWeb3()!
     
     return (
         <div className={styles.wrapper}>

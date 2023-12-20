@@ -2,7 +2,14 @@
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
 
-const Web3Context = createContext({});
+interface contextProps {
+    address: string | null,
+    error: string | null,
+    initalized: boolean,
+    connect: () => void
+}
+
+const Web3Context = createContext<contextProps|null>(null);
 
 interface Props {
     children: React.ReactNode
