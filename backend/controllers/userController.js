@@ -6,9 +6,13 @@ const createUser = asyncHandler(async (req, res) => {
 })
 
 const getUser = asyncHandler(async (req, res) => {
-    const user = await User.findOne({accounId: req.params.id});
-    
+    const user = await User.findOne({accounId: req.params.id})
     res.json(user);
 })
 
-module.exports = { getUser, createUser }
+const getUsers = asyncHandler(async (req, res) => {
+    const user = await User.find({});
+    res.json(user);
+})
+
+module.exports = { getUser, createUser, getUsers }

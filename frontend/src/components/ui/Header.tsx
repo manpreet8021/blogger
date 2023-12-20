@@ -1,4 +1,5 @@
 import Image from "next/image"
+import { useWeb3 } from "@/components/web3"
 
 const styles = {
     wrapper: 'flex justify-center gap-10 p-5 bg-[#FCC017]',
@@ -10,6 +11,8 @@ const styles = {
 }
 
 export default function Header() {
+    const {connect, address, error, initalized} = useWeb3()
+    
     return (
         <div className={styles.wrapper}>
             <div className={styles.content}>
@@ -18,7 +21,18 @@ export default function Header() {
                 </div>
                 <div className={styles.bannerNav}>
                     <div>Our Story</div>
-                    <div className={styles.accentedButton}>Connect</div>
+                    {
+                        initalized ?
+                            address ? 
+                                <span className={styles.accentedButton}>{address}</span> 
+                                : 
+                                    error == "Metamask" ? 
+                                        <button className={styles.accentedButton} onClick={() => window.open("https://metamask.io/download.html", "_blank")}>Install Metamask</button>
+                                    :
+                                        <button className={styles.accentedButton} onClick={connect}>Connect</button>
+                            : 
+                            <span className={styles.accentedButton}>Loading...</span>
+                    }
                 </div>
             </div>
         </div>

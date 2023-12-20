@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ReduxProvider } from '@/app/provider'
+import Web3ContextProvider from '@/components/web3'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,7 +19,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReduxProvider>{children}</ReduxProvider>
+        <Web3ContextProvider>
+          <ReduxProvider>{children}</ReduxProvider>
+        </Web3ContextProvider>
       </body>
     </html>
   )
