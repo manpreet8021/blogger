@@ -1,6 +1,7 @@
 "use client"
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
+import { useGetUserDetailQuery } from "../redux/slices/userApiSlice";
 
 interface contextProps {
     address: string | null,
