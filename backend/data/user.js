@@ -1,7 +1,7 @@
 const users = [
     {
         displayName: 'Manpreet Singh',
-        accounId: "0x528EF2ED44d714893106234CCb6FFD98C03Bf266"
+        accountId: "0x528ef2ed44d714893106234ccb6ffd98c03bf266"
     }
 ]
 

@@ -8,7 +8,7 @@ const userSchema = new Schema({
     },
     profileImage: String,
     bio: String,
-    accounId: {
+    accountId: {
         type: String,
         required: true,
         unique: true

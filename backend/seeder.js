@@ -21,6 +21,7 @@ const importData = async() => {
 
 const destroyData = async() => {
     await UserModel.deleteMany();
+    process.exit()
 }
 if(process.argv[2] == '-d') {
     destroyData();
