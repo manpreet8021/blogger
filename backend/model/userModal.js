@@ -3,8 +3,7 @@ const { Schema } = moongoose;
 
 const userSchema = new Schema({
     displayName: {
-        type: String,
-        required: true
+        type: String
     },
     profileImage: String,
     bio: String,

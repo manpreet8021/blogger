@@ -1,5 +1,6 @@
 import Image from "next/image"
 import { useWeb3 } from "@/components/web3"
+import { useGetUserDetailQuery } from "../redux/slices/userApiSlice";
 
 const styles = {
     wrapper: 'flex justify-center gap-10 p-5 bg-[#FCC017]',
@@ -11,8 +12,10 @@ const styles = {
 }
 
 export default function Header() {
-    const {connect, address, error, initalized} = useWeb3()!
-    
+    const {connect, address, hasError, initalized} = useWeb3()!
+
+    const { data, isLoading, error } = useGetUserDetailQuery({id: address!},{skip: address?false:true});
+
     return (
         <div className={styles.wrapper}>
             <div className={styles.content}>
@@ -22,11 +25,11 @@ export default function Header() {
                 <div className={styles.bannerNav}>
                     <div>Our Story</div>
                     {
-                        initalized ?
-                            address ? 
-                                <span className={styles.accentedButton}>{address}</span> 
+                        initalized || isLoading ?
+                            data ? 
+                                data.displayName && data.displayName != "" ? <span className={styles.accentedButton}>{data.displayName}</span> : <span className={styles.accentedButton}>User</span> 
                                 : 
-                                    error == "Metamask" ? 
+                                    hasError == "Metamask" ? 
                                         <button className={styles.accentedButton} onClick={() => window.open("https://metamask.io/download.html", "_blank")}>Install Metamask</button>
                                     :
                                         <button className={styles.accentedButton} onClick={connect}>Connect</button>

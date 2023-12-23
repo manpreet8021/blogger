@@ -1,13 +1,12 @@
 "use client"
 
 import { createContext, useContext, useEffect, useMemo, useState } from "react"
-import { useGetUserDetailQuery } from "../redux/slices/userApiSlice";
 
 interface contextProps {
     address: string | null,
-    error: string | null,
+    hasError: string | null,
     initalized: boolean,
-    connect: () => void
+    connect: () => void,
 }
 
 const Web3Context = createContext<contextProps|null>(null);
@@ -18,7 +17,7 @@ interface Props {
 
 export default function Web3ContextProvider({children}: Props) {
     const [address, setAddress] = useState<string|null>(null)
-    const [error, setError] = useState<string|null>(null)
+    const [hasError, setHasError] = useState<string|null>(null)
     const [initalized, setInitalized] = useState(false)
 
     useEffect(()=>{
@@ -36,7 +35,7 @@ export default function Web3ContextProvider({children}: Props) {
                 }
             } catch (err: any) {
                 if(err.message == 'metamask_needed') {
-                    setError("Metamask");
+                    setHasError("Metamask");
                 }
             } finally {
                 setInitalized(true)
@@ -67,7 +66,7 @@ export default function Web3ContextProvider({children}: Props) {
         return {
             initalized,
             address,
-            error,
+            hasError,
             connect: async () => {
                 try {
                     if(typeof window != undefined && window.ethereum != undefined) {
@@ -82,13 +81,13 @@ export default function Web3ContextProvider({children}: Props) {
                     }
                 } catch (err: any) {
                     if(err.message == 'metamask_needed') {
-                        setError("Metamask");
+                        setHasError("Metamask");
                     }
                 }
             }
         }
-    },[initalized, address, error])
-
+    },[initalized, address, hasError])
+    
     return(
         <Web3Context.Provider value={_web3Data}>
             {children}
