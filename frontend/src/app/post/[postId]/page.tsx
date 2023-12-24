@@ -13,7 +13,6 @@ const styles = {
 export default function Post() {
     return (
         <>
-            <Header />
             <div className={styles.content}>
                 <ReadersNav />
                 <ArticleMain />

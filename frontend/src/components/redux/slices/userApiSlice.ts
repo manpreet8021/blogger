@@ -7,13 +7,14 @@ interface getUserDetailProps{
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        getUserDetail: builder.query({
+        getUserDetail: builder.mutation({
             query: ({id}: getUserDetailProps) => ({
-                url: `${USERS_URL}/${id}`
-            }),
-            keepUnusedDataFor: 15
+                url: `${USERS_URL}/getUserInfo`,
+                method: 'POST',
+                body: {id: id}
+            })
         })
     })
 })
 
-export const { useGetUserDetailQuery } = userApiSlice;
+export const { useGetUserDetailMutation } = userApiSlice;

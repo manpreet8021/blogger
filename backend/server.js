@@ -5,6 +5,7 @@ const UserRoutes = require('./routes/userRoutes.js');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware.js');
 const web3 = require("./config/web3.js");
 const cors = require("cors")
+const BlogRoutes = require("./routes/blogRoutes.js")
 const cookieParser = require("cookie-parser")
 
 dotenv.config();
@@ -25,6 +26,7 @@ app.get('/', (req,res)=>{
 })
 
 app.use('/api/users', UserRoutes)
+app.use('/api/blog', BlogRoutes)
 
 // below are the default function used for errorHandling
 app.use(notFound)

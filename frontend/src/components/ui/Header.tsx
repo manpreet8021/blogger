@@ -1,6 +1,9 @@
 import Image from "next/image"
 import { useWeb3 } from "@/components/web3"
-import { useGetUserDetailQuery } from "../redux/slices/userApiSlice";
+import { useGetUserDetailMutation } from "../redux/slices/userApiSlice";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { setUserDetails } from "../redux/slices/userSlice";
 
 const styles = {
     wrapper: 'flex justify-center gap-10 p-5 bg-[#FCC017]',
@@ -13,8 +16,25 @@ const styles = {
 
 export default function Header() {
     const {connect, address, hasError, initalized} = useWeb3()!
+    const [getUser, {isLoading}] = useGetUserDetailMutation();
+    const user = useAppSelector(state => state.user)
+    const dispatch = useAppDispatch()
 
-    const { data, isLoading, error } = useGetUserDetailQuery({id: address!},{skip: address?false:true});
+    useEffect(()=>{
+        const getUserDetail = async () => {
+            if(address) {
+                try{
+                    const response = await getUser({id: address}).unwrap();
+                    dispatch(setUserDetails(response))
+                } catch(error) {
+                    console.log(error)
+                }
+            }
+        }
+
+        address && getUserDetail()
+        
+    }, [address, dispatch ])
 
     return (
         <div className={styles.wrapper}>
@@ -26,8 +46,8 @@ export default function Header() {
                     <div>Our Story</div>
                     {
                         initalized || isLoading ?
-                            data ? 
-                                data.displayName && data.displayName != "" ? <span className={styles.accentedButton}>{data.displayName}</span> : <span className={styles.accentedButton}>User</span> 
+                            user.userInfo ? 
+                            user.userInfo.displayName && user.userInfo.displayName != "" ? <span className={styles.accentedButton}>{user.userInfo.displayName}</span> : <span className={styles.accentedButton}>User</span> 
                                 : 
                                     hasError == "Metamask" ? 
                                         <button className={styles.accentedButton} onClick={() => window.open("https://metamask.io/download.html", "_blank")}>Install Metamask</button>

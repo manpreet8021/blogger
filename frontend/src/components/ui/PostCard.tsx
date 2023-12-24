@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import {blog} from '@/components/model/blogModel'
 
 const styles = {
     wrapper: 'flex max-w-[46rem] h-[10rem] items-center gap-[1rem] cursor-pointer',
@@ -16,9 +17,13 @@ const styles = {
     thumbnailContainer: ''
 }
 
-export default function PostCard() {
+interface Props {
+    blog: blog
+}
+
+export default function PostCard({blog}:Props) {
     return (
-        <Link href="/post/1">
+        <Link href={`post/${blog._id}`}>
             <div className={styles.wrapper}>
                 <div className={styles.postDetails}>
                     <div className={styles.authorContainer}>
@@ -30,12 +35,12 @@ export default function PostCard() {
                             Manpreet Singh
                         </div>
                     </div>
-                    <h1 className={styles.title}>Tools that will make you productive In 2023</h1>
+                    <h1 className={styles.title}>{blog.title}</h1>
                     <div className={styles.brefing}>
-                        Productivity is the skill that can be learned.
+                        {blog.description.substring(0,20)}....
                     </div>
                     <div className={styles.detailsContainer}>
-                        <span className={styles.articleDetails}>June 15 • 5 min read • <span className={styles.category}>productivity</span></span>
+                        <span className={styles.articleDetails}>June 15 • 5 min read • <span className={styles.category}>{blog.category}</span></span>
                     </div>
                 </div>
 
