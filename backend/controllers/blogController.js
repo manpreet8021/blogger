@@ -1,6 +1,7 @@
 const asyncHandler = require('../middleware/asyncHandler.js')
 const Blog = require('../model/blogModel.js')
 const Joi = require('joi')
+const web3 = require('web3')
 
 const blogUpdateSchema = Joi.object({
     title: Joi.string().required(),
@@ -47,6 +48,7 @@ const addBlog = asyncHandler(async(req, res) => {
     if(!validate.error) {
         const blog = await Blog.create(req.body);
         if(blog) {
+            addCourseToChain(blog._id, req.user.accountId)
             res.status(201).json()
         } else {
             res.status(400);
@@ -73,5 +75,9 @@ const updateBlog = asyncHandler(async(req, res) => {
         throw new Error("Data is not valid")
     }
 })
+
+const addCourseToChain = (id, owner) => {
+
+}
 
 module.exports = { getAllBlog, getBlog, addBlog, updateBlog }
